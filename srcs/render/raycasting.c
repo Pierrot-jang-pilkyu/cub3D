@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:28:01 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 21:14:49 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 18:42:25 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,34 +93,13 @@ void	tex_pos(t_game *game, t_map *map, t_ray *ray, int x)
 	map->step = 1.0 * map->texture[map->tex_num].height / ray->line_height;
 	map->tex_pos = \
 		(ray->draw_start - ray->height / 2 + ray->line_height / 2) * map->step;
-	map->tex[Y] = (int)map->tex_pos & (ray->height - 1);
-	switch (game->map.tex_num + 1)
-	{
-	case 1:
-		color = 0x00FF0000;
-		break; // red
-	case 2:
-		color = 0x0000FF00;
-		break; // green
-	case 3:
-		color = 0x000000FF;
-		break; // blue
-	case 4:
-		color = 0x00FFFFFF;
-		break; // white
-	default:
-		color = 0x00FFFF00;
-		break; // yellow
-	}
 	y = ray->draw_start - 1;
 	while (++y < ray->draw_end)
 	{
-		map->tex[Y] = (int)map->tex_pos & (ray->height - 1);
+		map->tex[Y] = (int)map->tex_pos & (map->texture[map->tex_num].height - 1);
 		map->tex_pos += map->step;
-		if (ray->side == 1)
-			color = (color >> 1) & 83355711;
+		color = map->texture[map->tex_num].color[map->texture[map->tex_num].height * map->tex[Y] + map->tex[X]];
 		*(pixel[x][y].color) = color;
-		// mlx_pixel_put(game->mlx, game->win, x, y, color);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 19:17:59 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 20:58:23 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 19:44:46 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	get_maze(t_map *map)
 		map->maze[x][y] = '\0';
 	}
 	map->maze[x] = NULL;
-	safety_dimention_free(temp);
+	safety_dimention_free(&temp);
 	return (0);
 }

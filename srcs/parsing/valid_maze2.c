@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 21:25:09 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 14:54:34 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 18:57:29 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ int	valid_in(t_map *map)
 
 	temp = get_zero_to_c(map, 0, 0);
 	if (!temp || map->in_err)
+	{
+		safety_dimention_free(&temp);
 		return (0);
+	}
 	x = 0;
 	while (x < map->width)
 	{
@@ -107,11 +110,14 @@ int	valid_in(t_map *map)
 		while (y < map->height)
 		{
 			if (temp[x][y] == '0')
+			{
+				safety_dimention_free(&temp);
 				return (1);
+			}
 			y++;
 		}
 		x++;
 	}
-	safety_dimention_free(temp);
+	safety_dimention_free(&temp);
 	return (0);
 }

@@ -6,12 +6,12 @@
 #    By: pjang <pjang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 03:49:53 by pjang             #+#    #+#              #
-#    Updated: 2023/02/25 18:52:04 by pjang            ###   ########.fr        #
+#    Updated: 2023/02/28 20:07:35 by pjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g
 
 LIBC	=	-L ./libft/ -lft -L ./mlx/ -lmlx -framework OpenGL -framework AppKit
@@ -19,9 +19,11 @@ MLX		=	mlx/libmlx.a
 LFT		=	libft/libft.a
 SRCS	= 	./srcs/main.c \
 			./srcs/parsing/get_cub.c \
+			./srcs/parsing/get_cub2.c \
 			./srcs/parsing/get_maze.c \
 			./srcs/parsing/parsing.c \
 			./srcs/parsing/valid_cub.c \
+			./srcs/parsing/valid_cub2.c \
 			./srcs/parsing/valid_maze.c \
 			./srcs/parsing/valid_maze2.c \
 			./srcs/render/dda.c \

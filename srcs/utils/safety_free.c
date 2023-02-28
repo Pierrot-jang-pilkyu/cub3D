@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:33:35 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/24 17:36:54 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 18:50:25 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void	safety_free(void **str)
 	}
 }
 
-void	safety_dimention_free(char **strs)
+void	safety_dimention_free(char ***strs)
 {
 	char	**temp;
 
-	if (strs)
+	if (*strs)
 	{
-		temp = strs;
-		while (*strs != NULL)
+		temp = *strs;
+		while (*temp != NULL)
 		{
-			if (*strs)
-				free(*strs);
-			*strs++ = NULL;
+			if (*temp)
+				free(*temp);
+			*temp++ = NULL;
 		}
-		strs = temp;
-		free(strs);
-		strs = NULL;
+		temp = *strs;
+		free(temp);
+		temp = NULL;
 	}
 }

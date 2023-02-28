@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 12:13:47 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 15:06:31 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 18:04:57 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_img(t_img *img)
 	img->img = NULL;
 	img->addr = NULL;
 	img->path = NULL;
+	img->color = ft_calloc((128 * 128), sizeof(unsigned int));
 	img->width = 128;
 	img->height = 128;
 	img->bits_per_pixel = 0;
@@ -62,7 +63,7 @@ void	init_ray(t_ray *ray)
 	ray->line_height = 0;
 	ray->draw_start = 0;
 	ray->draw_end = 0;
-	ray->wall_x = 0;
+	ray->wall_x = 0.0;
 	ray->camera_x = (double)0;
 	ray->wall_dist = (double)0;
 	while (i < 2)

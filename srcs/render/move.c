@@ -6,11 +6,20 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 05:57:59 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 21:11:20 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 18:41:31 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	valid_pos(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	if (c == '0')
+		return (1);
+	return (0);
+}
 
 void	move_add(t_game *game, double vec[2])
 {
@@ -19,9 +28,9 @@ void	move_add(t_game *game, double vec[2])
 
 	ray = &game->ray;
 	map = &game->map;
-	if (map->maze[(int)(ray->pos[X] + vec[X])][(int)(ray->pos[Y])] == '0')
+	if (valid_pos(map->maze[(int)(ray->pos[X] + vec[X])][(int)(ray->pos[Y])]))
 		ray->pos[X] += vec[X];
-	if (map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] + vec[Y])] == '0')
+	if (valid_pos(map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] + vec[Y])]))
 		ray->pos[Y] += vec[Y];
 }
 
@@ -32,9 +41,9 @@ void	move_sub(t_game *game, double vec[2])
 
 	ray = &game->ray;
 	map = &game->map;
-	if (map->maze[(int)(ray->pos[X] - vec[X])][(int)(ray->pos[Y])] == '0')
+	if (valid_pos(map->maze[(int)(ray->pos[X] + vec[X])][(int)(ray->pos[Y])]))
 		ray->pos[X] -= vec[X];
-	if (map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] - vec[Y])] == '0')
+	if (valid_pos(map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] + vec[Y])]))
 		ray->pos[Y] -= vec[Y];
 }
 

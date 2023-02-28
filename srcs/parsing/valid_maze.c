@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:57:11 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/24 22:26:01 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 19:41:11 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,26 @@ int	valid_bound_space(t_map *map, int x, int y)
 {
 	if (x == 0)
 	{
-		while (map->maze[x][y] == ' ')
+		while (x < map->width -1 && map->maze[x][y] == ' ')
 			x++;
 	}
 	if (x == map->width -1)
 	{
-		while (map->maze[x][y] == ' ')
+		while (x >= 0 && map->maze[x][y] == ' ')
 			x--;
 	}
 	if (y == 0)
 	{
-		while (map->maze[x][y] == ' ')
+		while (y < map->height -1 && map->maze[x][y] == ' ')
 			y++;
 	}
 	if (y == map->height -1)
 	{
-		while (map->maze[x][y] == ' ')
+		while (y >= 0 && map->maze[x][y] == ' ')
 			y--;
 	}
+	if (x < 0 || x >= map->width || y < 0 || y > map->height)
+		return (1);
 	if (map->maze[x][y] != '1')
 		return (0);
 	return (1);

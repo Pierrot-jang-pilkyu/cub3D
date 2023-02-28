@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:19:00 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 05:37:48 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 20:30:15 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	get_color(char *str, t_map *map)
 			map->ceil[i] = ft_atoi(temp2[i]);
 		ret = 0;
 	}
-	safety_dimention_free(temp1);
-	safety_dimention_free(temp2);
+	safety_dimention_free(&temp1);
+	safety_dimention_free(&temp2);
 	return (ret);
 }
 
@@ -56,6 +56,7 @@ int	get_path(char *str, t_map *map)
 		map->texture[W].path = ft_strdup(temp[1]);
 	if (!ft_strncmp("EA", str, 2))
 		map->texture[E].path = ft_strdup(temp[1]);
+	safety_dimention_free(&temp);
 	return (!ret);
 }
 
@@ -69,7 +70,10 @@ int	get_map(char *str, t_map *map)
 		return (1);
 	newlst = ft_lstnew(temp);
 	if (!newlst)
+	{
+		safety_free((void **)&temp);
 		return (1);
+	}
 	ft_lstadd_back(&map->lst_map, newlst);
 	map->height++;
 	map->width = ft_max(map->width, ft_strlen(temp));
@@ -101,28 +105,26 @@ char	*get_notnl(int fd)
 
 int	get_cub(int fd, t_map *map)
 {
+	int		ret;
 	int		flag;
 	char	*temp;
 
+	ret = 0;
 	while (777)
 	{
 		temp = get_notnl(fd);
 		if (!temp)
 			break ;
 		if (*temp == '\0')
+		{
+			safety_free((void **)&temp);
 			continue ;
+		}
 		flag = valid_cub(temp);
-		if (flag == 1 && get_color(temp, map))
-			return (1);
-		else if (flag == 2 && get_path(temp, map))
-			return (1);
-		else if (flag == 3 && get_map(temp, map))
-			return (1);
-		else if (flag == 0)
-			return (1);
+		ret = get_cub2(flag, map, temp);
 		safety_free((void **)&temp);
 	}
-	if (get_maze(map))
-		return (1);
-	return (0);
+	if (!ret && get_maze(map))
+		ret = 1;
+	return (ret);
 }

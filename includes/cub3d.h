@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:41:53 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 19:13:11 by pjang            ###   ########.fr       */
+/*   Updated: 2023/02/28 20:07:23 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_img
 	void			*img;
 	unsigned int	*addr;
 	char			*path;
+	unsigned int	*color;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -89,7 +90,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		wall_x;
+	double	wall_x;
 }				t_ray;
 
 typedef struct s_map
@@ -146,21 +147,28 @@ t_pixel	**init_pixel(t_img *img);
 
 void	put_error(char *message);
 void	safety_free(void **str);
-void	safety_dimention_free(char **strs);
+void	safety_dimention_free(char ***strs);
 
 // parsing
 
 int		valid_cub(char *str);
+int		valid_color(char *str);
 int		valid_in(t_map *map);
 int		valid_maze(t_map *map);
+
+int		get_color(char *str, t_map *map);
+int		get_path(char *str, t_map *map);
+int		get_map(char *str, t_map *map);
 int		get_maze(t_map *map);
 int		get_cub(int fd, t_map *map);
+int		get_cub2(int flag, t_map *map, char *temp);
 int		parsing(t_game *game);
 
 // render
 
 void	window_init(t_game *game);
 void	img_init(t_game *game);
+void	get_color_in_texture(t_game *game, t_map *map);
 
 int		render(t_game *game);
 
@@ -170,8 +178,6 @@ void	calculate_dist(t_ray *ray);
 void	calculate_hline(t_ray *ray);
 int		ft_mlx_img(t_game *game);
 void	ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
-void	put_xpm_to_img(t_game *game, t_map *map);
-void	get_addr(t_map *map);
 
 void	draw_vertical(t_game *game, int x, unsigned int color);
 void	draw_base(t_game *game);
