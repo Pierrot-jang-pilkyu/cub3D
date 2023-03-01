@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cub.c                                          :+:      :+:    :+:   */
+/*   get_cub_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:19:00 by pjang             #+#    #+#             */
-/*   Updated: 2023/03/01 17:04:32 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 21:50:18 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,13 @@ int	get_cub(int fd, t_map *map)
 			safety_free((void **)&temp);
 			continue ;
 		}
-		flag = valid_cub(temp);
+		flag = valid_cub(temp, map);
 		ret = get_cub2(flag, map, temp);
 		safety_free((void **)&temp);
+		if (ret == 1)
+			break ;
 	}
-	if (!ret && get_maze(map))
+	if ((!ret && get_maze(map)) || map->player != 1)
 		ret = 1;
 	return (ret);
 }

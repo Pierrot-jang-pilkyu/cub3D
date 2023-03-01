@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:58:03 by pjang             #+#    #+#             */
-/*   Updated: 2023/03/01 17:07:36 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 21:47:49 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,32 @@ int	valid_path(char *str)
 	return (ret);
 }
 
-int	valid_c(char *str)
+int	valid_c(char *str, t_map *map)
 {
-	int	player;
+	int			ret;
 
-	player = 0;
+	ret = 1;
 	while (*str)
 	{
 		if (!(ft_isdigit(*str) || *str == ' ' \
 			|| *str == 'N' || *str == 'S' || *str == 'W' || *str == 'E'))
-		{
-			if (*str == 'N' || *str == 'S' || *str == 'W' || *str == 'E')
-				player++;
-			return (0);
-		}
-		if (player > 1)
-			return (0);
+			ret = 0;
+		if (*str == 'N' || *str == 'S' || *str == 'W' || *str == 'E')
+			map->player++;
+		if (map->player > 1)
+			ret = 0;
 		str++;
 	}
-	return (1);
+	return (ret);
 }
 
-int	valid_cub(char *str)
+int	valid_cub(char *str, t_map *map)
 {
 	if (valid_color(str))
 		return (1);
 	if (valid_path(str))
 		return (2);
-	if (valid_c(str))
+	if (valid_c(str, map))
 		return (3);
 	return (0);
 }

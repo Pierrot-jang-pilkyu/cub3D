@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:41:53 by pjang             #+#    #+#             */
-/*   Updated: 2023/03/01 19:27:54 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 21:29:40 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_map
 	int		floor[3];
 	int		ceil[3];
 	int		in_err;
+	int		player;
 	int		tex_num;
 	int		tex[2];
 	double	tex_pos;
@@ -151,7 +152,7 @@ void	safety_dimention_free(char ***strs);
 
 // parsing
 
-int		valid_cub(char *str);
+int		valid_cub(char *str, t_map *map);
 int		valid_color(char *str);
 int		valid_in(t_map *map, int x, int y);
 char	**get_zero_to_c(t_map *map, int x, int y);

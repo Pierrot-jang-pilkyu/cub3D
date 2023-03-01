@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 12:13:47 by pjang             #+#    #+#             */
-/*   Updated: 2023/03/01 17:06:46 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 21:28:23 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_map(t_map *map)
 	map->width = 0;
 	map->height = 0;
 	map->in_err = 0;
+	map->player = 0;
 	map->tex_num = 0;
 	map->tex_pos = (double)0;
 	map->step = (double)0;
