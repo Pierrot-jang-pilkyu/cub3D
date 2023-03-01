@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:41:53 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/28 20:07:23 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 19:27:54 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ void	safety_dimention_free(char ***strs);
 
 int		valid_cub(char *str);
 int		valid_color(char *str);
-int		valid_in(t_map *map);
+int		valid_in(t_map *map, int x, int y);
+char	**get_zero_to_c(t_map *map, int x, int y);
 int		valid_maze(t_map *map);
 
 int		get_color(char *str, t_map *map);

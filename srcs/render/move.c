@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 05:57:59 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/28 18:41:31 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 19:41:33 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,35 @@ int	valid_pos(char c)
 
 void	move_add(t_game *game, double vec[2])
 {
+	int		x;
+	int		y;
 	t_ray	*ray;
 	t_map	*map;
 
 	ray = &game->ray;
 	map = &game->map;
-	if (valid_pos(map->maze[(int)(ray->pos[X] + vec[X])][(int)(ray->pos[Y])]))
+	x = (int)floor(ray->pos[X] + vec[X]);
+	y = (int)floor(ray->pos[Y] + vec[Y]);
+	if (valid_pos(map->maze[x][(int)(ray->pos[Y])]))
 		ray->pos[X] += vec[X];
-	if (valid_pos(map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] + vec[Y])]))
+	if (valid_pos(map->maze[(int)(ray->pos[X])][y]))
 		ray->pos[Y] += vec[Y];
 }
 
 void	move_sub(t_game *game, double vec[2])
 {
+	int		x;
+	int		y;
 	t_ray	*ray;
 	t_map	*map;
 
 	ray = &game->ray;
 	map = &game->map;
-	if (valid_pos(map->maze[(int)(ray->pos[X] + vec[X])][(int)(ray->pos[Y])]))
+	x = (int)ceil(ray->pos[X] + vec[X]);
+	y = (int)ceil(ray->pos[Y] + vec[Y]);
+	if (valid_pos(map->maze[x][(int)(ray->pos[Y])]))
 		ray->pos[X] -= vec[X];
-	if (valid_pos(map->maze[(int)(ray->pos[X])][(int)(ray->pos[Y] + vec[Y])]))
+	if (valid_pos(map->maze[(int)(ray->pos[X])][y]))
 		ray->pos[Y] -= vec[Y];
 }
 

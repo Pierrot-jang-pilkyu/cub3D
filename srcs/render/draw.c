@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:18:59 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 21:15:13 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 19:01:30 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	draw_base(t_game *game)
 		x = -1;
 		while (++x < game->img.width)
 			*(pixel[x][y].color) = game->color.ceil;
-			// mlx_pixel_put(game->mlx, game->win, x, y, game->color.ceil);
 	}
 	y--;
 	while (++y < game->img.height)
@@ -47,6 +46,5 @@ void	draw_base(t_game *game)
 		x = -1;
 		while (++x < game->img.width)
 			*(pixel[x][y].color) = game->color.floor;
-			// mlx_pixel_put(game->mlx, game->win, x, y, game->color.floor);
 	}
 }

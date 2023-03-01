@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:28:01 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/28 18:42:25 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:17:49 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ void	tex_pos(t_game *game, t_map *map, t_ray *ray, int x)
 	y = ray->draw_start - 1;
 	while (++y < ray->draw_end)
 	{
-		map->tex[Y] = (int)map->tex_pos & (map->texture[map->tex_num].height - 1);
+		map->tex[Y] = (int)map->tex_pos & (128 - 1);
 		map->tex_pos += map->step;
-		color = map->texture[map->tex_num].color[map->texture[map->tex_num].height * map->tex[Y] + map->tex[X]];
+		color = map->texture[map->tex_num].color[128 * map->tex[Y] + \
+			map->tex[X]];
 		*(pixel[x][y].color) = color;
 	}
 }

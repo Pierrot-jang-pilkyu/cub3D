@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:28:01 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/25 21:14:23 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:19:16 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ void	dda(t_map *map, t_ray *ray)
 			ray->map[Y] += ray->step[Y];
 			ray->side = 1;
 		}
-		if (map->maze[ray->map[X]][ray->map[Y]] == '1')
+		if (!(ray->map[X] >= 0 && ray->map[X] < map->width && ray->map[Y] >= 0 \
+			&& ray->map[Y] < map->height))
+			break ;
+		if (map->maze[ray->map[X]][ray->map[Y]] == '1' \
+			|| map->maze[ray->map[X]][ray->map[Y]] == ' ')
 			ray->hit = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 01:58:18 by pjang             #+#    #+#             */
-/*   Updated: 2023/02/28 18:02:13 by pjang            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:38:41 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	get_colors(t_img *texture)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < texture->height)
@@ -23,7 +23,8 @@ void	get_colors(t_img *texture)
 		x = 0;
 		while (x < texture->width)
 		{
-			texture->color[y * texture->height + x] = texture->addr[y * texture->height + x];
+			texture->color[y * texture->height + x] = \
+				texture->addr[y * texture->height + x];
 			x++;
 		}
 		y++;
@@ -38,7 +39,8 @@ void	get_color_in_texture(t_game *game, t_map *map)
 	while (i < 4)
 	{
 		map->texture[i].img = mlx_xpm_file_to_image(game->mlx, \
-			map->texture[i].path, &map->texture[i].width, &map->texture[i].height);
+			map->texture[i].path, &map->texture[i].width, \
+			&map->texture[i].height);
 		map->texture[i].addr = (unsigned int *)mlx_get_data_addr(\
 			map->texture[i].img, &map->texture[i].bits_per_pixel, \
 			&map->texture[i].line_length, &map->texture[i].endian);
